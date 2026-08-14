@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AiTap 邮箱验证</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #0f1419;
+      --card: #1a2332;
+      --text: #e8eef7;
+      --muted: #9aa8bc;
+      --accent: #4f8cff;
+      --danger: #ff6b6b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      background: radial-gradient(circle at top, #1b2a44, var(--bg));
+      color: var(--text);
+      padding: 24px;
+    }
+    .card {
+      width: min(420px, 100%);
+      background: var(--card);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 32px 28px;
+      text-align: center;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.35);
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+    p {
+      margin: 0;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+    .status {
+      margin-top: 20px;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+    .status.error { color: var(--danger); }
+    .hint {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1 id="title">邮箱验证</h1>
+    <p id="subtitle">正在处理验证结果…</p>
+    <div id="status" class="status"></div>
+    <p class="hint">验证完成后，请返回 AiTap 客户端使用邮箱与密码登录。</p>
+  </main>
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var hash = new URLSearchParams(window.location.hash.replace(/^#/, ""));
+      var error = params.get("error_description") || params.get("error") || hash.get("error_description") || hash.get("error");
+      var type = params.get("type") || hash.get("type") || "";
+      var title = document.getElementById("title");
+      var subtitle = document.getElementById("subtitle");
+      var status = document.getElementById("status");
+
+      if (error) {
+        title.textContent = "验证未完成";
+        subtitle.textContent = "链接可能已过期或已被使用。";
+        status.textContent = decodeURIComponent(error.replace(/\+/g, " "));
+        status.className = "status error";
+        return;
+      }
+
+      if (type === "recovery") {
+        title.textContent = "密码重置";
+        subtitle.textContent = "请返回 AiTap 客户端，使用邮件中的新密码流程完成重置。";
+      } else {
+        title.textContent = "邮箱验证成功";
+        subtitle.textContent = "您的邮箱已完成验证。";
+      }
+      status.textContent = "可以关闭此页面。";
+    })();
+  </script>
+</body>
+</html>
