@@ -52,6 +52,9 @@
 ![alt text](images/39.png)
 ```md
 新增项：两个坐标文件，请使用图示参考来截取坐标
+分别是用时识别金币阈值和路程信息的坐标文件
+文件在缺失状态下也能正常运行，可直接删除
 ```
 ![alt text](images/45.png)
 ![alt text](images/46.png)
+![alt text](images/48.png)

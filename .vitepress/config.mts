@@ -29,6 +29,7 @@ export default defineConfig({
             { text: '辅助脚本使用教程', link: '/guide/helper' },
             { text: '脚本参数详情', link: '/guide/params' },
             { text: '附加功能', link: '/guide/extras' },
+            { text: '注意事项', link: '/guide/notices' },
             { text: '常见问题', link: '/guide/faq' },
           ],
         },
