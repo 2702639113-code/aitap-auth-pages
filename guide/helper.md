@@ -49,6 +49,7 @@
 ![alt text](images/38.png)
 ```md
 自动驾驶（聚光灯游戏中）示例为多人模式，实际用途为聚光灯
+请去聚光灯模式截取该图片
 ```
 ![alt text](images/39.png)
 ```md
